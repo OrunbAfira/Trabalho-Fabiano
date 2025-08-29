@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criptografia Assimétrica RSA</title>
+    <link rel="stylesheet" href="styles.css"> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/3.2.1/jsencrypt.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Criptografia Assimétrica RSA</h1>
+        <p class="intro-text">Use o botão abaixo para criar um novo par de chaves pública e privada. A chave pública pode ser compartilhada, enquanto a chave privada deve ser mantida em segredo.</p>
+        <button id="generateKeysButton">1. Gerar Par de Chaves (2048-bit)</button>
+        <div class="keys-display">
+            <div class="input-group">
+                <label for="publicKeyOutput">Chave Pública</label>
+                <textarea id="publicKeyOutput" readonly placeholder="Sua chave pública aparecerá aqui..."></textarea>
+            </div>
+            <div class="input-group">
+                <label for="privateKeyOutput">Chave Privada</label>
+                <textarea id="privateKeyOutput" readonly placeholder="Sua chave privada aparecerá aqui..."></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Criptografar Mensagem</h2>
+        <div class="input-group">
+            <label for="publicKeyInput">Chave Pública do Destinatário:</label>
+            <textarea id="publicKeyInput" placeholder="Cole a chave pública aqui"></textarea>
+        </div>
+        <div class="input-group">
+            <label for="messageToEncrypt">Mensagem Original:</label>
+            <input type="text" id="messageToEncrypt" placeholder="Digite o texto confidencial">
+        </div>
+        <button id="encryptButton">2. Criptografar com Chave Pública</button>
+        <div class="result-box">
+            <label for="encryptedMessage">Mensagem Criptografada (Base64):</label>
+            <textarea id="encryptedMessage" readonly class="result-content" placeholder="O resultado criptografado aparecerá aqui..."></textarea>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Descriptografar Mensagem</h2>
+        <div class="input-group">
+            <label for="privateKeyInput">Sua Chave Privada:</label>
+            <textarea id="privateKeyInput" placeholder="Cole sua chave privada aqui"></textarea>
+        </div>
+        <div class="input-group">
+            <label for="messageToDecrypt">Mensagem Criptografada:</label>
+            <textarea id="messageToDecrypt" placeholder="Cole a mensagem recebida aqui"></textarea>
+        </div>
+        <button id="decryptButton">3. Descriptografar com Chave Privada</button>
+        <div class="result-box">
+            <label for="decryptedMessage">Mensagem Original Revelada:</label>
+            <div id="decryptedMessage" class="result-content"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

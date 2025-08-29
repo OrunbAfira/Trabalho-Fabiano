@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criptografia Simétrica AES</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+<body>
+    <main>
+        <section class="container">
+            <h1>Criptografar Mensagem</h1>
+            <div class="input-group">
+                <label for="message">Mensagem Original:</label>
+                <input type="text" id="message" placeholder="Digite o texto aqui">
+            </div>
+            <div class="input-group">
+                <label for="encryptKey">Chave Secreta:</label>
+                <div class="password-wrapper">
+                    <input type="password" id="encryptKey" placeholder="Digite a chave secreta">
+                    <button class="toggle-password" type="button" aria-label="Mostrar ou ocultar chave">👁️</button>
+                </div>
+            </div>
+            <button id="encryptButton">Criptografar</button>
+
+            <div class="result-box">
+                <label for="encryptedMessage">Mensagem Criptografada (Base64):</label>
+                <div class="result-wrapper">
+                    <div id="encryptedMessage" class="result-content" role="status" aria-live="polite"></div>
+                    <button class="copy-button" data-target="encryptedMessage">Copiar</button>
+                </div>
+            </div>
+        </section>
+        <section class="container">
+            <h2>Descriptografar Mensagem</h2>
+            <div class="input-group">
+                <label for="encryptedInput">Mensagem Criptografada (Base64):</label>
+                <textarea id="encryptedInput" placeholder="Cole a mensagem criptografada aqui"></textarea>
+            </div>
+            <div class="input-group">
+                <label for="decryptKey">Chave Secreta:</label>
+                <div class="password-wrapper">
+                    <input type="password" id="decryptKey" placeholder="A chave deve ser a mesma">
+                    <button class="toggle-password" type="button" aria-label="Mostrar ou ocultar chave">👁️</button>
+                </div>
+            </div>
+            <button id="decryptButton">Descriptografar</button>
+            <div class="result-box">
+                <label for="decryptedMessage">Mensagem Descriptografada:</label>
+                <div class="result-wrapper">
+                    <div id="decryptedMessage" class="result-content" role="status" aria-live="polite"></div>
+                    <button class="copy-button" data-target="decryptedMessage">Copiar</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="script.js" defer></script>
+</body>
+</html>
