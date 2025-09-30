@@ -9,10 +9,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const decryptedResultDiv = document.getElementById('decryptedMessage');
     const copyButtons = document.querySelectorAll('.copy-button');
     const togglePasswordButtons = document.querySelectorAll('.toggle-password');
+
     function updateResultBox(element, text, isError = false) {
         element.textContent = text;
         element.style.color = isError ? 'red' : '#333';
     }
+
     encryptButton.addEventListener('click', () => {
         const message = messageInput.value;
         const key = encryptKeyInput.value;
@@ -21,6 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         try {
+            // 1. Criptografa a mensagem usando o algoritmo AES (simétrico) com a chave fornecida.
+            // O .toString() converte o resultado para uma string no formato Base64, segura para ser transmitida.
             const encrypted = CryptoJS.AES.encrypt(message, key).toString();
             updateResultBox(encryptedResultDiv, encrypted);
             encryptedInput.value = encrypted; 
@@ -29,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateResultBox(encryptedResultDiv, 'Ocorreu um erro durante a criptografia.', true);
         }
     });
+
     decryptButton.addEventListener('click', () => {
         const encryptedText = encryptedInput.value;
         const key = decryptKeyInput.value;
@@ -38,7 +43,10 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         try {
+            // 1. Descriptografa a mensagem usando o algoritmo AES e a mesma chave usada para criptografar.
+            // O resultado é um objeto contendo os bytes (palavras) da mensagem original.
             const decryptedBytes = CryptoJS.AES.decrypt(encryptedText, key);
+            // 2. Converte os bytes descriptografados de volta para uma string legível usando o formato UTF-8.
             const originalMessage = decryptedBytes.toString(CryptoJS.enc.Utf8);
 
             if (originalMessage) {
@@ -51,6 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateResultBox(decryptedResultDiv, 'Erro. Verifique se a mensagem está no formato Base64 correto.', true);
         }
     });
+
     copyButtons.forEach(button => {
         button.addEventListener('click', (e) => {
             const targetId = e.target.dataset.target;
@@ -70,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
     togglePasswordButtons.forEach(button => {
         button.addEventListener('click', (e) => {
             const passwordInput = e.target.previousElementSibling;
@@ -79,3 +89,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
